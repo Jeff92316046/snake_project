@@ -1,0 +1,40 @@
+html {
+    font-size: 15px; /* px means 'pixels': the base font size is now 10 pixels high  */
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    src: url(https://fonts.gstatic.com/s/opensans/v28/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4kaVIGxA.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+#My_test_image_1{
+  position: absolute;
+  top: 70px;
+  left: 30px;
+}
+#My_test_image_2{
+  position: absolute;
+  top: 70px;
+  left: 230px;
+}
+#My_test_image_3{
+  position: absolute;
+  top: 70px;
+  left: 430px;
+} 
+#My_test_link_1{
+  position: absolute;
+  top:360px;
+  left: 85px;
+
+}
+#My_test_link_2{
+  position: absolute;
+  top: 360px;
+  left: 280px;
+}
+#My_test_link_3{
+  position: absolute;
+  top: 360px;
+  left: 475px;
+}
