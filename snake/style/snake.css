@@ -4,8 +4,8 @@ html{
 }
 #snake_head{
     position: relative;
-    top: 10px;
-    left: 10px;
+    top: 0px;
+    left: 0px;
 }
 div{
     border-style: solid;
