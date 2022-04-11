@@ -20,6 +20,8 @@ function move(way, increase_or_decrease, role) {
             role.style.top = String(Number(role.style.top.slice(0, -2)) - 5).concat("px");
         }
     }
+    console.log(role.style.top);
+    console.log(role.style.left);
 }
 function setimage(key, role) {
     switch (key.keyCode) {
@@ -62,28 +64,27 @@ function main(key, role) {
     movejudge(key);
 }
 /*
-function position(key,role,border){
-    if(Number(role.style.top.slice(0,-2)) < 0){
-        move(-1,1,role);
+function position_judge(role, border) {
+    if (Number(role.style.top.slice(0, -2)) < 0) {
+        move(-1, 1, role);
     }
-    if(Number(role.style.top.slice(0,-2)) > border.style.w){
-        move(-1,1,role);
+    if (Number(role.style.top.slice(0, -2)) > Number(border.style.height.slice(0, -2))) {
+        move(-1, -1, role);
     }
-    if(Number(role.style.top.slice(0,-2)) < 0){
-        move(-1,1,role);
+    if (Number(role.style.left.slice(0, -2)) < 0) {
+        move(1, 1, role);
     }
-    if(Number(role.style.top.slice(0,-2)) < 0){
-        move(-1,1,role);
+    if (Number(role.style.left.slice(0, -2)) > Number(border.style.width.slice(0, -2))) {
+        move(1, -1, role);
     }
-
 }
 */
 var body = document.body;
 body.addEventListener('keydown', function (e) {
     main(e, snake);
-}, false) //偵測按下按鍵的行為
-while (true) {
-    move(move_value_1, move_value_2, move_value_3);
-}
+}, false); //偵測按下按鍵的行為
+setInterval("move(move_value_1, move_value_2, move_value_3)", 50);
+//setInterval("position_judge(snake,border)", 50);
+
 
 
