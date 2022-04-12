@@ -1,8 +1,11 @@
 var snake = document.getElementById('snake_head');
 var border = document.getElementById('border_object');
+var food_object = document.getElementById('food_object');
 var move_value_1 = 1;
 var move_value_2 = 1;
 var move_value_3 = snake;
+var food_X;
+var food_Y;
 function move(way, increase_or_decrease, role) {
     if (way === 1) {
         if (increase_or_decrease === 1) {
@@ -63,28 +66,55 @@ function main(key, role) {
     setimage(key, role);
     movejudge(key);
 }
-/*
+
 function position_judge(role, border) {
     if (Number(role.style.top.slice(0, -2)) < 0) {
         move(-1, 1, role);
     }
-    if (Number(role.style.top.slice(0, -2)) > Number(border.style.height.slice(0, -2))) {
+    if (Number(role.style.top.slice(0, -2)) > Number(border.style.height.slice(0, -2)) - 30) {
         move(-1, -1, role);
     }
     if (Number(role.style.left.slice(0, -2)) < 0) {
         move(1, 1, role);
     }
-    if (Number(role.style.left.slice(0, -2)) > Number(border.style.width.slice(0, -2))) {
+    if (Number(role.style.left.slice(0, -2)) > Number(border.style.width.slice(0, -2)) - 30) {
         move(1, -1, role);
     }
+}
+function food_create() {
+    food_object.style.left = String(food_X).concat("px");
+    food_object.style.top = String(food_Y).concat("px");
+    console.log("food_C")
+}
+function ramdom_food_position() {
+    food_Y = (Math.floor(Math.random() * 45) + 1) * 10;
+    food_X = (Math.floor(Math.random() * 85) + 1) * 10;
+    console.log("food_R");
+}
+
+function eat_food(role, food) {
+    if (Number(role.style.left.slice(0, -2)) >= Number(food.style.left.slice(0, -2))
+        && Number(role.style.left.slice(0, -2)) <= Number(food.style.left.slice(0, -2)) + 60
+        && Number(role.style.top.slice(0, -2)) <= Number(food.style.top.slice(0, -2)) + 30
+        && Number(role.style.top.slice(0, -2)) >= Number(food.style.top.slice(0, -2)) - 30) {
+        ramdom_food_position();
+        food_create();
+    }
+
+}
+/*
+function addbody(role){
+
+
 }
 */
 var body = document.body;
 body.addEventListener('keydown', function (e) {
     main(e, snake);
 }, false); //偵測按下按鍵的行為
-setInterval("move(move_value_1, move_value_2, move_value_3)", 50);
-//setInterval("position_judge(snake,border)", 50);
+setInterval("move(move_value_1, move_value_2, snake)", 50);
+setInterval("position_judge(snake,border)", 25);
+setInterval("eat_food(snake,food_object)", 50);
 
 
 

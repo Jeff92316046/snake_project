@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 600px; width: 1000px;">
 
 <head>
   <meta charset="utf-8">
-  <link href="style/snake.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-  <div id="border_object">
-    <img src="image\snake_head_R.png" alt="a snake head" id="snake_head">
+  <div id="border_object" style="border-style: solid; border-width: 10px; height: 500px; width: 900px;
+  position: absolute; top: 50px; left: 50px;">
+    <img src="image\snake_head_R.png" alt="a snake head" id="snake_head"
+      style="position: relative; top: 250px; left: 450px;">
+    <img src="image\food.png" id="food_object" style="position:relative; top:0px; left: 0px;" alt="food"></img>
   </div>
+
   <script src="scripts/main.js"></script>
 </body>
 
