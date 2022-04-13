@@ -6,25 +6,26 @@ var move_value_2 = 1;
 var move_value_3 = snake;
 var food_X;
 var food_Y;
+var body_Num = 0;
+var body_position_X = [];
+var body_position_Y = [];
 function move(way, increase_or_decrease, role) {
     if (way === 1) {
         if (increase_or_decrease === 1) {
-            role.style.left = String(Number(role.style.left.slice(0, -2)) + 5).concat("px");
+            role.style.left = String(Number(role.style.left.slice(0, -2)) + 30).concat("px");
         }
         if (increase_or_decrease === -1) {
-            role.style.left = String(Number(role.style.left.slice(0, -2)) - 5).concat("px");
+            role.style.left = String(Number(role.style.left.slice(0, -2)) - 30).concat("px");
         }
     }
     if (way === -1) {
         if (increase_or_decrease === 1) {
-            role.style.top = String(Number(role.style.top.slice(0, -2)) + 5).concat("px");
+            role.style.top = String(Number(role.style.top.slice(0, -2)) + 30).concat("px");
         }
         if (increase_or_decrease === -1) {
-            role.style.top = String(Number(role.style.top.slice(0, -2)) - 5).concat("px");
+            role.style.top = String(Number(role.style.top.slice(0, -2)) - 30).concat("px");
         }
     }
-    console.log(role.style.top);
-    console.log(role.style.left);
 }
 function setimage(key, role) {
     switch (key.keyCode) {
@@ -84,12 +85,10 @@ function position_judge(role, border) {
 function food_create() {
     food_object.style.left = String(food_X).concat("px");
     food_object.style.top = String(food_Y).concat("px");
-    console.log("food_C")
 }
 function ramdom_food_position() {
     food_Y = (Math.floor(Math.random() * 45) + 1) * 10;
     food_X = (Math.floor(Math.random() * 85) + 1) * 10;
-    console.log("food_R");
 }
 
 function eat_food(role, food) {
@@ -99,22 +98,57 @@ function eat_food(role, food) {
         && Number(role.style.top.slice(0, -2)) >= Number(food.style.top.slice(0, -2)) - 30) {
         ramdom_food_position();
         food_create();
+        addbody();
+        body_setting(-1, role);
+    } else {
+        body_setting(1, role);
     }
+}
+
+function addbody() {
+    var snake_body = document.createElement("img");
+    document.getElementById('border_object').appendChild(snake_body);
+    snake_body.setAttribute("id", "snake_body_" + String(body_Num));
+    snake_body.setAttribute("src", "image/snake_body_red.png");
+    snake_body.setAttribute("style", "visibility:hidden");
+    body_Num += 1;
+}
+function set_snake_position(Num) {
+    var temp_snake = document.getElementById('snake_body_' + String(Num));
+    temp_snake.style.position = 'relative';
+    temp_snake.style.left = body_position_X[Num];
+    temp_snake.style.top = body_position_Y[Num];
+    temp_snake.style.visibility = 'visible';
+}
+function refresh_body_position(role, delete_assurance) {
+    body_position_Y.unshift(role.style.top);
+    body_position_X.unshift(role.style.left);
+    if (delete_assurance == 1) {
+        body_position_X.pop();
+        body_position_Y.pop();
+    }
+}
+function body_setting(delete_assurance, role) {
+    for (var i = 0; i <= body_Num; i++) {
+        set_snake_position(i);
+    }
+    refresh_body_position(role, delete_assurance);
+}
+function debug() {
+    for (var i = 0; i <= body_Num; i++) {
+        console.log(body_position_X[i]);
+        console.log(body_position_Y[i]);
+    }
+    console.log("_________")
 
 }
-/*
-function addbody(role){
-
-
-}
-*/
 var body = document.body;
 body.addEventListener('keydown', function (e) {
     main(e, snake);
 }, false); //偵測按下按鍵的行為
-setInterval("move(move_value_1, move_value_2, snake)", 50);
+setInterval("move(move_value_1, move_value_2, snake)", 150);
 setInterval("position_judge(snake,border)", 25);
 setInterval("eat_food(snake,food_object)", 50);
-
+setInterval("debug()", 150);
 
 
