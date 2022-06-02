@@ -9,6 +9,7 @@ var food_Y;
 var body_Num = 0;
 var body_position_X = [];
 var body_position_Y = [];
+var delete_assurance = 0;
 function move(way, increase_or_decrease, role) {
     if (way === 1) {
         if (increase_or_decrease === 1) {
@@ -26,6 +27,8 @@ function move(way, increase_or_decrease, role) {
             role.style.top = String(Number(role.style.top.slice(0, -2)) - 30).concat("px");
         }
     }
+
+
 }
 function setimage(key, role) {
     switch (key.keyCode) {
@@ -99,9 +102,6 @@ function eat_food(role, food) {
         ramdom_food_position();
         food_create();
         addbody();
-        body_setting(-1, role);
-    } else {
-        body_setting(1, role);
     }
 }
 
@@ -112,43 +112,52 @@ function addbody() {
     snake_body.setAttribute("src", "image/snake_body_red.png");
     snake_body.setAttribute("style", "visibility:hidden");
     body_Num += 1;
+    delete_assurance = 1;
 }
 function set_snake_position(Num) {
-    var temp_snake = document.getElementById('snake_body_' + String(Num));
-    temp_snake.style.position = 'relative';
+    var temp_snake = document.getElementById('snake_body_'.concat(String(Num)));
+    temp_snake.style.position = "relative";
     temp_snake.style.left = body_position_X[Num];
     temp_snake.style.top = body_position_Y[Num];
     temp_snake.style.visibility = 'visible';
 }
-function refresh_body_position(role, delete_assurance) {
+function refresh_body_position(role) {
     body_position_Y.unshift(role.style.top);
     body_position_X.unshift(role.style.left);
-    if (delete_assurance == 1) {
+    if (delete_assurance == 0) {
         body_position_X.pop();
         body_position_Y.pop();
     }
+    delete_assurance = 0;
 }
-function body_setting(delete_assurance, role) {
-    for (var i = 0; i <= body_Num; i++) {
+function body_setting() {
+    for (var i = 0; i < body_Num; i++) {
+        for (var j = 0; j < 20000000; j++) {
+            continue;
+        }
         set_snake_position(i);
+        console.log("set_body_" + String(i))
     }
-    refresh_body_position(role, delete_assurance);
 }
+
 function debug() {
-    for (var i = 0; i <= body_Num; i++) {
+    console.log(snake.style.left);
+    console.log(snake.style.top);
+    for (var i = 0; i < body_Num; i++) {
         console.log(body_position_X[i]);
         console.log(body_position_Y[i]);
     }
     console.log("_________")
 
 }
+
 var body = document.body;
 body.addEventListener('keydown', function (e) {
     main(e, snake);
 }, false); //偵測按下按鍵的行為
-setInterval("move(move_value_1, move_value_2, snake)", 150);
+setInterval("move(move_value_1, move_value_2, snake)", 100);
 setInterval("position_judge(snake,border)", 25);
 setInterval("eat_food(snake,food_object)", 50);
-setInterval("debug()", 150);
-
-
+setInterval("debug()", 10);
+setInterval("refresh_body_position(snake)", 300);
+setInterval("body_setting()", 50);
