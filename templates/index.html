@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html style="height: 540px; width: 900px;">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="defeat" style="visibility: hidden;position: absolute; top: 90px;left: 900px;font-size: 30px;">defeat</div>
+  <div id="body_num" style="position: absolute; top: 150px;left: 900px;font-size: 30px;">0</div>
+  <div id="border_object" style="border-style: solid; border-width: 10px; height: 510px; width: 810px;
+  position: relative; top: 30px; left: 30px;">
+    <img src="{{url_for('static',filename='snake_head_D.png')}}" alt="a_snake_head" id="snake_head"
+      style="position: absolute; top: 240px; left: 450px;z-index:-100;">
+    <img src="{{url_for('static',filename='food.png')}}" id="food_object" style="position:relative; top:30px; left: 30px;" alt="food"></img>
+  </div>
+  
+  <script src="{{url_for('static',filename='main.js')}}"></script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ html{
     width: 1000px;
 }
 #snake_head{
-    position: relative;
+    position: sticky;
     top: 250px;
     left: 450px;
 }
