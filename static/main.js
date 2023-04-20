@@ -33,35 +33,43 @@ function move(way, increase_or_decrease, role) {
 }
 function setimage(key, role) {
     switch (key.keyCode) {
-        case 37 || 68://L
+        case 37 :
+        case 65://L
             role.setAttribute('src', "/static/snake_head_L.png");
             break;
-        case 38 || 87://T
+        case 38:
+        case 87://T
             role.setAttribute('src', "/static/snake_head_T.png");
             break;
-        case 39 || 65://R
+        case 39:
+        case 68://R
             role.setAttribute('src', "/static/snake_head_R.png");
             break;
-        case 40 || 83://D
+        case 40:
+        case 83://D
             role.setAttribute('src', "/static/snake_head_D.png");
             break;
     }
 }
 function movejudge(key) {
     switch (key.keyCode) {
-        case 37 || 68://L
+        case 37 :
+        case 65://L
             move_value_1 = 1;
             move_value_2 = -1;
             break;
-        case 38 || 87://T
+        case 38: 
+        case 87://T
             move_value_1 = -1;
             move_value_2 = -1;
             break;
-        case 39 || 65://R
+        case 39:
+        case 68://R
             move_value_1 = 1;
             move_value_2 = 1;
             break;
-        case 40 || 83://D
+        case 40 :
+        case 83://D
             move_value_1 = -1;
             move_value_2 = 1;
             break;
